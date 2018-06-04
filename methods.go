@@ -5,18 +5,18 @@ import (
 	"fmt"
 )
 
-type User struct {
+type Person struct {
 	userId   int
 	username string
 	birthday int
 }
 
-func (user *User) computeAge() int {
+func (user *Person) computeAge() int {
 
 	return user.computeAge2(time.Now())
 }
 
-func (user User) computeAge2(currentTime time.Time) int {
+func (user Person) computeAge2(currentTime time.Time) int {
 
 	birthday := time.Unix(int64(user.birthday), 0)
 
@@ -38,7 +38,7 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	user := User{userId: 100001, username: "Luckyboys", birthday: int(time.Date(1984, time.December, 8, 0, 0, 0, 0, location).Unix())}
+	user := Person{userId: 100001, username: "Luckyboys", birthday: int(time.Date(1984, time.December, 8, 0, 0, 0, 0, location).Unix())}
 	fmt.Println(user)
 	fmt.Println(user.computeAge())
 
