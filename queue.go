@@ -12,17 +12,22 @@ import (
 type Queue struct {
 	data chan interface{}
 	lock sync.Mutex
+	isLocking *atomic.Bool
 }
 
 func NewQueue() *Queue {
 	q := new(Queue)
-	q.data = make(chan interface{})
+	q.data = make(chan interface{},2000000)
+	q.isLocking = atomic.NewBool(false)
 	return q
 }
 
 func (q *Queue) Push(v interface{}) {
 
 	q.extend()
+	for q.isLocking.Load() {
+		time.Sleep(time.Microsecond)
+	}
 	q.data <- v
 }
 
@@ -45,7 +50,9 @@ func (q *Queue) Dump() []interface{} {
 	nextQueue := make(chan interface{}, queueLength)
 
 	q.lock.Lock()
+	q.isLocking.Store(true)
 	defer q.lock.Unlock()
+	defer q.isLocking.Store(false)
 
 	var res []interface{}
 	for i := 0 ; i < queueLength ; i ++ {
@@ -96,7 +103,7 @@ func main() {
 	producerRoutine := atomic.NewUint64(0)
 	consumerRoutine := atomic.NewUint64(0)
 
-	for i := 0 ; i < 2 ; i++ {
+	for i := 0 ; i < 1000 ; i++ {
 
 		producerRoutine.Add(1)
 		go func(){
@@ -107,16 +114,27 @@ func main() {
 		}()
 	}
 
-	//for i := 0 ; i < 10 ; i++ {
-	//
-	//	consumerRoutine.Add(1)
-	//	go func(){
-	//		for j := 0 ; j < 100000 ; j++ {
-	//			q.Pop()
-	//		}
-	//		consumerRoutine.Sub(1)
-	//	}()
-	//}
+	for producerRoutine.Load() > 0 {
+
+		fmt.Printf("Length: %d , Producer: %d , Consumer: %d\n",
+			q.Len(), producerRoutine.Load(), consumerRoutine.Load(),
+		)
+		time.Sleep(time.Second)
+	}
+
+	for i := 0 ; i < 100 ; i++ {
+
+		consumerRoutine.Add(1)
+		go func(){
+			for {
+				_ , err := q.Pop()
+				if err != nil {
+					break
+				}
+			}
+			consumerRoutine.Sub(1)
+		}()
+	}
 
 	startTime := time.Now()
 	for consumerRoutine.Load() > 0 || producerRoutine.Load() > 0 || time.Now().Sub(startTime).Minutes() < 1 {
