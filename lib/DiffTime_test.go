@@ -137,3 +137,19 @@ func TestDiffTime_Sub7(t *testing.T) {
 	assert.Equal(t, int8(59), dt.Second)
 	assert.Equal(t, 0, dt.Nanosecond)
 }
+
+func TestDateDiff(t *testing.T) {
+
+	time1 := time.Date(2018, 10, 10, 0, 0, 0, 0, time.UTC)
+	time2 := time.Date(2017, 10, 11, 0, 0, 0, 0, time.UTC)
+
+	dt := DateDiff(&time1,&time2)
+
+	assert.Equal(t, int16(0), dt.Year)
+	assert.Equal(t, int8(11), dt.Month)
+	assert.Equal(t, int8(29), dt.Day)
+	assert.Equal(t, int8(0), dt.Hour)
+	assert.Equal(t, int8(0), dt.Minute)
+	assert.Equal(t, int8(0), dt.Second)
+	assert.Equal(t, 0, dt.Nanosecond)
+}
