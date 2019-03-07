@@ -16,12 +16,14 @@ func main() {
 	user := make(map[string]interface{})
 
 	fmt.Println(user)
+	fmt.Printf("len(user): %d\n", len(user))
 	printMaps(user)
 
 	user[KeyLoginTime] = "1234321"
 	user[KeyUserId] = 123
 
 	fmt.Println(user)
+	fmt.Printf("len(user): %d\n", len(user))
 	printMaps(user)
 
 	fmt.Println("map key count: ", len(user))
