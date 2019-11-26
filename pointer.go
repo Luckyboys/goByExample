@@ -13,12 +13,28 @@ func main() {
 	fmt.Println(i)
 
 	fmt.Println("pointer:", &i)
+
+	isSamePointer()
 }
 
-func zeroValue( i int ) {
+func zeroValue(i int) {
 	i = 0
 }
 
-func zeroPointer( p *int ) {
+func zeroPointer(p *int) {
 	*p = 0
+}
+
+type TestPointerStruct struct {
+	Name string
+}
+
+func isSamePointer() {
+
+	structA := new(TestPointerStruct)
+	structB := new(TestPointerStruct)
+
+	fmt.Printf("is same struct pointer: %v\n", structA == structB)
+
+	fmt.Printf("is same struct value: %v\n", *structA == *structB)
 }
