@@ -33,8 +33,10 @@ func isSamePointer() {
 
 	structA := new(TestPointerStruct)
 	structB := new(TestPointerStruct)
+	structCPointA := structA
 
-	fmt.Printf("is same struct pointer: %v\n", structA == structB)
+	fmt.Printf("is same struct pointer structA == structB: %v\n", structA == structB)
+	fmt.Printf("is same struct pointer structA == structCPointA: %v\n", structA == structCPointA)
 
 	fmt.Printf("is same struct value: %v\n", *structA == *structB)
 }
