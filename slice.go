@@ -42,33 +42,40 @@ func main() {
 		}
 	}
 
-	printTable( table )
-}
+	printTable(table)
 
+	var keys []int
+	fmt.Println(keys)
+	fmt.Println("cap: ", cap(keys))
+	keys = append(keys, 1)
+	keys = append(keys, 2)
+	keys = append(keys, 3)
+	fmt.Println(keys)
+}
 
 /**
  * 打印表格内容
  * @param [][]int table 一个整形的表格，用来展示用
  */
-func printTable( table [][]int ) {
+func printTable(table [][]int) {
 
-	fmt.Println( "[" )
+	fmt.Println("[")
 	for x := range table {
 
-		fmt.Printf( "\t[" )
+		fmt.Printf("\t[")
 		notFirstElement := false
 		for y := range table[x] {
 
 			if notFirstElement {
-				fmt.Printf( "\t" )
+				fmt.Printf("\t")
 			}
 
-			fmt.Printf( "%d" , table[x][y] )
+			fmt.Printf("%d", table[x][y])
 
 			notFirstElement = true
 		}
 
-		fmt.Printf( "]\n" )
+		fmt.Printf("]\n")
 	}
-	fmt.Println( "]" )
+	fmt.Println("]")
 }
