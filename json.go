@@ -10,13 +10,14 @@ func main() {
 
 	testDurationJSON()
 	testJSONMarshalError()
+	testJSONUnmarshalNullString()
 }
 
 func testJSONMarshalError() {
 	data, err := json.Marshal(struct {
 		A interface{}
 	}{make(chan int)})
-	fmt.Printf("data: %v, err: %v", string(data), err)
+	fmt.Printf("data: %v, err: %v\n", string(data), err)
 }
 
 func testDurationJSON() {
@@ -38,4 +39,19 @@ func testDurationJSON() {
 		return
 	}
 	fmt.Println(string(byteData))
+}
+
+func testJSONUnmarshalNullString() {
+
+	jsonString := []byte(`{"data": null}`)
+	data := struct {
+		Data string `json:"data"`
+	}{}
+	err := json.Unmarshal(jsonString, &data)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Printf("data: %#v\n", data)
 }
