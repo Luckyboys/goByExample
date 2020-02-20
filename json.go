@@ -11,6 +11,7 @@ func main() {
 	testDurationJSON()
 	testJSONMarshalError()
 	testJSONUnmarshalNullString()
+	testCombineStruct()
 }
 
 func testJSONMarshalError() {
@@ -54,4 +55,30 @@ func testJSONUnmarshalNullString() {
 	}
 
 	fmt.Printf("data: %#v\n", data)
+}
+
+type StructA struct {
+	AField int `json:"aField"`
+}
+
+type StructB struct {
+	StructA
+	BField int `json:"bField"`
+}
+
+func testCombineStruct() {
+
+	object := &StructB{
+		StructA: StructA{
+			AField: 1,
+		},
+		BField: 2,
+	}
+	jsonBytes, err := json.Marshal(object)
+	if err != nil {
+		fmt.Printf("combine data json marshal error: %v\n", err)
+		return
+	}
+
+	fmt.Printf("combine data json: %s\n", string(jsonBytes))
 }
