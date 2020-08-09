@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/qbox/qvm/server/errors"
 )
 
 func main() {
 
-	var err *errors.Error
+	var err error
 	fmt.Printf("error: %#v\n", err)
 	err = nil
 	fmt.Printf("error: %#v\n", err)
