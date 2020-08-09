@@ -12,6 +12,7 @@ func main() {
 	testJSONMarshalError()
 	testJSONUnmarshalNullString()
 	testCombineStruct()
+	testMarshalEmptyString()
 }
 
 func testJSONMarshalError() {
@@ -81,4 +82,18 @@ func testCombineStruct() {
 	}
 
 	fmt.Printf("combine data json: %s\n", string(jsonBytes))
+}
+
+func testMarshalEmptyString() {
+
+	data := struct {
+		Data string `json:"data"`
+	}{}
+	jsonBytes, err := json.Marshal(data)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Printf("json: %s\n", string(jsonBytes))
 }
