@@ -22,9 +22,9 @@ func main() {
 
 	width := 10
 	height := 5
-	c := make( [][]int , width )
+	c := make([][]int, width)
 	for x := 0; x < width; x++ {
-		c[x] = make( []int , height )
+		c[x] = make([]int, height)
 		for y := 0; y < height; y++ {
 			c[x][y] = x + y
 		}
@@ -32,7 +32,12 @@ func main() {
 
 	fmt.Println("[")
 	for x := range c {
-		fmt.Printf( "\t%v\n" , c[x] )
+		fmt.Printf("\t%v\n", c[x])
 	}
 	fmt.Println("]")
+
+	type S struct {
+	}
+	sList := make([]*S, 0)
+	fmt.Println("empty array == nil ? %v", sList == nil)
 }
