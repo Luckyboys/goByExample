@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/sirupsen/logrus"
+)
 
 func main() {
 
@@ -36,8 +40,20 @@ func main() {
 	}
 	fmt.Println("]")
 
-	type S struct {
-	}
 	sList := make([]*S, 0)
 	fmt.Println("empty array == nil ? %v", sList == nil)
+
+	logrus.WithField("sArray", getArray()).Info("s is nil")
+
+	for _, s := range getArray() {
+
+		fmt.Println(s)
+	}
+}
+
+type S struct {
+}
+
+func getArray() []*S {
+	return nil
 }
