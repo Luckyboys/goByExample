@@ -8,6 +8,13 @@ import (
 func main() {
 
 	detail := `
+#### 受众人群包类型
+
+| 值 | 描述 |
+| --- | --- |
+| RETARGETING\_INCLUDE | 包含人群包 |
+| RETARGETING\_EXCLUDE | 排除人群包 |
+
 
 #### 抖音达人级别
 
@@ -36,9 +43,9 @@ func main() {
 
 	var tableContent string
 	if endPos < 0 {
-		tableContent = detail[pos+len(tableIndex)+endPos:]
+		tableContent = detail[pos+len(tableIndex):]
 	} else {
-		tableContent = detail[pos+len(tableIndex) : len(tableIndex)+endPos]
+		tableContent = detail[pos+len(tableIndex):pos+len(tableIndex)+endPos]
 	}
 
 	fmt.Println(strings.TrimSpace(tableContent))
