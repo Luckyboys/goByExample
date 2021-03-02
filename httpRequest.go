@@ -14,6 +14,19 @@ func main() {
 	getTwiceBody()
 
 	sendWithTimeout()
+
+	httpRequestURI()
+}
+
+func httpRequestURI() {
+
+	req, err := http.NewRequest(http.MethodGet, "http://www.baidu.com/?c=2&a=2&b=1", nil)
+	if err != nil {
+		fmt.Printf("error: %v\n", err)
+		return
+	}
+
+	fmt.Printf("requestURI: %s\n", req.URL.RequestURI())
 }
 
 func getTwiceBody() {
