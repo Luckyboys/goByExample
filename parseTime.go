@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/Luckyboys/goByExample/lib"
 	"log"
 	"time"
+
+	"github.com/Luckyboys/goByExample/lib"
 )
 
 func main() {
@@ -24,4 +25,11 @@ func main() {
 
 	timeStamp, ok = lib.ParseTime("20181208235959")
 	log.Printf("UnixTimeStamp: %d , ParseOK: %t\n", timeStamp, ok)
+
+	t, err := time.Parse(time.RFC3339, "2021-04-22T12:05:00+08:00")
+	if err != nil {
+		log.Printf("parse time error, error: %v", err)
+	} else {
+		log.Printf("parse time: %v", t.Format(time.RFC3339))
+	}
 }
