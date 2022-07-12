@@ -13,6 +13,7 @@ func main() {
 	testJSONUnmarshalNullString()
 	testCombineStruct()
 	testMarshalEmptyString()
+	testMarshalJSONTagStruct()
 }
 
 func testJSONMarshalError() {
@@ -96,4 +97,17 @@ func testMarshalEmptyString() {
 	}
 
 	fmt.Printf("json: %s\n", string(jsonBytes))
+}
+
+type TestJSONStruct struct {
+	AField int    `json:"a_field"`
+	Data   string `json:"data"`
+	BField int
+	CField int `json:"cField,string"`
+}
+
+func testMarshalJSONTagStruct() {
+
+	jsonBytes, _ := json.Marshal(TestJSONStruct{})
+	fmt.Printf("testMarshalJSONTagStruct: %s\n", string(jsonBytes))
 }
