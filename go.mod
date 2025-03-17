@@ -1,6 +1,8 @@
 module github.com/Luckyboys/goByExample
 
-go 1.18
+go 1.23
+
+toolchain go1.23.2
 
 require (
 	github.com/anaskhan96/go-password-encoder v0.0.0-20181201075956-886d67a3e91b
@@ -8,13 +10,14 @@ require (
 	github.com/gin-gonic/gin v1.9.0
 	github.com/satori/go.uuid v1.2.0
 	github.com/shadowsocks/shadowsocks-go v0.0.0-20200409064450-3e585ff90601
-	github.com/sirupsen/logrus v1.6.0
+	github.com/sirupsen/logrus v1.9.0
 	github.com/sony/sonyflake v1.0.0
-	github.com/stretchr/testify v1.8.1
+	github.com/spf13/cast v1.7.1
+	github.com/stretchr/testify v1.8.4
 	go.uber.org/atomic v1.6.0
 	golang.org/x/net v0.17.0
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
-	gopkg.in/yaml.v2 v2.3.0
+	gopkg.in/yaml.v2 v2.4.0
 )
 
 require (
@@ -29,10 +32,9 @@ require (
 	github.com/goccy/go-json v0.10.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
-	github.com/konsorten/go-windows-terminal-sequences v1.0.3 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
-	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
